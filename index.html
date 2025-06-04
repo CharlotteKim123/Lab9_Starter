@@ -102,6 +102,51 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    const actions = {
+      "Console Log": () => console.log("Logging"),
+      "Console Error": () => console.error("Error Message"),
+      "Console Count": () => console.count("Count"),
+      "Console Warn": () => console.warn("Warning"),
+      "Console Assert": () => console.assert(5 + 5 == 15, "Expression is false."),
+      "Console Clear": () => console.clear(),
+      "Console Dir": () => {
+        const obj = { name: "Method", type: "Example" };
+        console.dir(obj);
+      },
+      "Console dirxml": () => {
+        console.dirxml(form);
+      },
+      "Console Group Start": () => {
+        console.log("Start Group");
+        console.group();
+        console.log("Inside group");
+      },
+      "Console Group End": () => console.groupEnd(),
+      "Console Table": () => {
+        const data = [{ name: "Math", grade: 95 }, { name: "English", grade: 100 }];
+        console.table(data);
+      },
+      "Start Timer": () => console.time("Time"),
+      "End Timer": () => console.timeEnd("Time"),
+      "Console Trace": () => {
+        function exampleFunction() {
+          secondFunction();
+        }
+        function secondFunction() {
+          console.trace();
+        }
+      }
+    };
+    document.querySelectorAll('#error-btns > button').forEach(btn => {
+      const label = btn.textContent.trim();
+      if (consoleActions[label]) {
+        btn.addEventListener("click", consoleActions[label]);
+      }
+    });
+    
+
+    
+    
   </script>
 </body>
 
