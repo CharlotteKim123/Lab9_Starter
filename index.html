@@ -139,15 +139,15 @@
     };
     document.querySelectorAll('#error-btns > button').forEach(btn => {
       const label = btn.textContent.trim();
-      if (consoleActions[label]) {
-        btn.addEventListener("click", consoleActions[label]);
+      if (actions[label]) {
+        btn.addEventListener("click", actions[label]);
       }
     });
     
 
     function calculate(firstNum, secondNum, operator) {
-      if (operator === '-' && Number(secondNum) > Number(firstNum)) {
-        throw new Error("Result is not a natural number.");
+      if (operator === '/' && Number(secondNum) === 0) {
+        throw new Error("Cannot divide by 0.");
       }
       return eval(`${firstNum} ${operator} ${secondNum}`);
     }
@@ -171,22 +171,22 @@
     });
 
 
-    class UnnaturalNumError extends Error {
+    class ZeroDivisionError extends Error {
       constructor(message) {
         super(message);
-        this.name = "UnnaturalNumError";
+        this.name = "ZeroDivisionError";
       }
     }
     
-    function naturalSubtract(a, b) {
-      if (b > a) throw new UnnaturalNumError("Result is not a natural number.");
-      return a - b;
+    function divide(a, b) {
+      if (b > a) throw new ZeroDivisionError("Cannot divide by 0.");
+      return a / b;
     }
     
     try {
-      console.log(naturalSubtract(4, 0));
+      console.log(divide(9, 0));
     } catch (err) {
-      if (err instanceof UnnaturalNumError) {
+      if (err instanceof ZeroDivisionError) {
         console.error("Custom Error Caught:", err.message);
       } 
       else {
