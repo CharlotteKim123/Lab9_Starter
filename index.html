@@ -171,6 +171,31 @@
     });
 
 
+    class UnnaturalNumError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "UnnaturalNumError";
+      }
+    }
+    
+    function naturalSubtract(a, b) {
+      if (b > a) throw new UnnaturalNumError("Result is not a natural number.");
+      return a - b;
+    }
+    
+    try {
+      console.log(naturalSubtract(4, 0));
+    } catch (err) {
+      if (err instanceof UnnaturalNumError) {
+        console.error("Custom Error Caught:", err.message);
+      } 
+      else {
+        console.error("Regular Error:", err);
+      }
+    }
+
+
+    
     
     
   </script>
