@@ -195,10 +195,29 @@
     }
 
 
+    function setupGlobalErrorHandler() {
+      window.onerror = function (message, source, line, column, error) {
+        console.log("Global Error Caught");
+        console.log(`Message: ${message} at ${line}:${column}`);
+        console.log("Source:", source);
+        console.log("Error object:", error);
+        return true; 
+      };
+    }
+    setupGlobalErrorHandler();
     
-    
+    document.querySelector("button:info").addEventListener("click", () => {
+      nonthingFunction(); 
+    });
+
+    window.TrackJS && TrackJS.install({ 
+      token: "339273121b7246ac9e53ff7aacc3e8d0"
+    });
     
   </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+
+  
 </body>
 
 </html>
