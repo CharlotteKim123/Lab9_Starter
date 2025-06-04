@@ -145,6 +145,32 @@
     });
     
 
+    function calculate(firstNum, secondNum, operator) {
+      if (operator === '-' && Number(secondNum) > Number(firstNum)) {
+        throw new Error("Result is not a natural number.");
+      }
+      return eval(`${firstNum} ${operator} ${secondNum}`);
+    }
+    
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const output = document.querySelector("output");
+      const firstNum = document.querySelector("#first-num").value;
+      const secondNum = document.querySelector("#second-num").value;
+      const operator = document.querySelector("#operator").value;
+      
+      try {
+        const result = calculate(firstNum, secondNum, operator);
+        output.innerHTML = result;
+      } catch (err) {
+        output.innerHTML = "Error: " + err.message;
+        console.error(err);
+      } finally {
+        console.log("Submit event complete.");
+      }
+    });
+
+
     
     
   </script>
